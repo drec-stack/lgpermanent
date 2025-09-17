@@ -89,6 +89,23 @@
             color: #6f42c1;
         }
         
+        .admin-login-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+        }
+        
+        .admin-login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
         /* Мобильное меню */
         .menu-toggle {
             display: none;
@@ -260,6 +277,15 @@
             box-shadow: 0 8px 25px rgba(111, 66, 193, 0.4);
         }
         
+        .btn-booking {
+            background: linear-gradient(135deg, #20c997 0%, #199d76 100%);
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+        }
+        
+        .btn-booking:hover {
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4);
+        }
+        
         /* Секция услуг */
         .services {
             padding: 100px 0;
@@ -342,7 +368,7 @@
         }
         
         .service-card h3 {
-            color: 6f42c1;
+            color: #6f42c1;
             margin-bottom: 20px;
             font-size: 1.5rem;
             font-weight: 600;
@@ -489,6 +515,24 @@
             font-size: 15px;
         }
         
+        /* Секция онлайн-записи */
+        .booking-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f9d5e5 0%, #d6eaf8 100%);
+            text-align: center;
+        }
+        
+        .booking-btn {
+            background: linear-gradient(135deg, #20c997 0%, #199d76 100%);
+            padding: 15px 40px;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+        }
+        
+        .booking-btn:hover {
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4);
+        }
+        
         /* Новые стили для системы отзывов */
         .testimonials-filter {
             display: flex;
@@ -625,6 +669,349 @@
             color: #dee2e6;
             margin-bottom: 20px;
             display: block;
+        }
+        
+        /* Форма добавления отзыва */
+        .add-review-section {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #f9d5e5 0%, #d6eaf8 100%);
+            text-align: center;
+        }
+        
+        .add-review-btn {
+            background: linear-gradient(135deg, #20c997 0%, #199d76 100%);
+            padding: 15px 40px;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+        }
+        
+        .add-review-btn:hover {
+            box-shadow: 0 8px 25px rgba(32, 201, 151, 0.4);
+        }
+        
+        /* Общие стили для форм */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #6f42c1;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #d63384;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(214, 51, 132, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            font-size: 30px;
+            color: #dee2e6;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .star-rating input:checked ~ label {
+            color: #dee2e6;
+        }
+        
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked + label,
+        .star-rating input:checked ~ label {
+            color: #ffc107;
+        }
+        
+        .form-submit-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        
+        .form-note {
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        /* Стили для формы записи */
+        .booking-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .booking-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .time-slot {
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .time-slot:hover {
+            border-color: #d63384;
+            background-color: #f8f9fa;
+        }
+        
+        .time-slot.selected {
+            background: linear-gradient(135deg, #d63384 0%, #6f42c1 100%);
+            color: white;
+            border-color: #d63384;
+        }
+        
+        .time-slot.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f8f9fa;
+        }
+        
+        /* Админ панель */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .admin-panel.active {
+            right: 0;
+        }
+        
+        .admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            display: none;
+        }
+        
+        .admin-overlay.active {
+            display: block;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .admin-title {
+            color: #d63384;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .admin-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c757d;
+            transition: color 0.3s ease;
+        }
+        
+        .admin-close:hover {
+            color: #d63384;
+        }
+        
+        .admin-section {
+            margin-bottom: 30px;
+        }
+        
+        .admin-section-title {
+            color: #6f42c1;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d63384;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .admin-review-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #6f42c1;
+        }
+        
+        .admin-review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .admin-review-service {
+            background: linear-gradient(135deg, #6f42c1 0%, #4a2d8a 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .admin-review-rating {
+            color: #ffc107;
+        }
+        
+        .admin-review-text {
+            color: #495057;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .admin-review-author {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .admin-review-date {
+            color: #adb5bd;
+            font-size: 12px;
+        }
+        
+        .admin-review-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .admin-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .admin-btn-delete:hover {
+            background: #c82333;
+        }
+        
+        .admin-btn-edit {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .admin-btn-edit:hover {
+            background: #5a6268;
+        }
+        
+        .admin-logout {
+            background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
         
         @keyframes fadeIn {
@@ -897,41 +1284,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
         
-        /* Стиль для загрузки */
-        .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #d63384;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        .loading-text {
-            margin-top: 20px;
-            color: #6f42c1;
-            font-size: 18px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
         /* Адаптивность */
         @media (max-width: 1200px) {
             .container {
@@ -940,6 +1292,10 @@
             
             .hero h1 {
                 font-size: 3rem;
+            }
+            
+            .admin-panel {
+                width: 350px;
             }
         }
         
@@ -965,6 +1321,22 @@
             
             .testimonial-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .form-container {
+                padding: 30px;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .admin-panel {
+                width: 320px;
+            }
+            
+            .admin-stats {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -1072,6 +1444,19 @@
             
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-container {
+                padding: 25px 20px;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .admin-panel {
+                width: 100%;
+                right: -100%;
             }
             
             /* Адаптивность для новой системы отзывов */
@@ -1190,6 +1575,18 @@
                 font-size: 1.3rem;
             }
             
+            .form-container {
+                padding: 20px 15px;
+            }
+            
+            .star-rating label {
+                font-size: 24px;
+            }
+            
+            .time-slots {
+                grid-template-columns: 1fr;
+            }
+            
             /* Адаптивность для системы отзывов */
             .testimonials-filter {
                 flex-direction: column;
@@ -1217,6 +1614,41 @@
                 height: 250px;
             }
         }
+        
+        /* Стиль для загрузки */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #d63384;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            color: #6f42c1;
+            font-size: 18px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1226,6 +1658,41 @@
         <div class="loading-text">Загрузка...</div>
     </div>
 
+    <!-- Админ панель -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2 class="admin-title">Админ-панель</h2>
+            <button class="admin-close" onclick="closeAdminPanel()">×</button>
+        </div>
+        
+        <div class="admin-section">
+            <h3 class="admin-section-title">Статистика</h3>
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalReviews">0</div>
+                    <div class="stat-label">Всего отзывов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgRating">0</div>
+                    <div class="stat-label">Средний рейтинг</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="admin-section">
+            <h3 class="admin-section-title">Управление отзывами</h3>
+            <div id="adminReviewsList">
+                <!-- Список отзывов для администрирования -->
+            </div>
+        </div>
+        
+        <button class="admin-logout" onclick="logoutAdmin()">
+            <i class="fas fa-sign-out-alt"></i> Выйти
+        </button>
+    </div>
+    
+    <div class="admin-overlay" id="adminOverlay" onclick="closeAdminPanel()"></div>
+
     <!-- Шапка сайта -->
     <header>
         <div class="container">
@@ -1234,17 +1701,23 @@
                     <div class="logo-circle">LG</div>
                     <div class="logo-text">Permanent<span>Beauty</span></div>
                 </a>
-                <button class="menu-toggle" id="menuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <div style="display: flex; align-items: center;">
+                    <button class="admin-login-btn" id="adminLoginBtn" onclick="openAdminLogin()">
+                        <i class="fas fa-lock"></i> Админ
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
                 <nav id="mainNav">
                     <ul>
                         <li><a href="#services">Услуги</a></li>
                         <li><a href="#about">О нас</a></li>
                         <li><a href="#benefits">Преимущества</a></li>
                         <li><a href="#testimonials">Отзывы</a></li>
+                        <li><a href="#booking">Запись</a></li>
                         <li><a href="#location">Местоположение</a></li>
                         <li><a href="#contact">Контакты</a></li>
                     </ul>
@@ -1262,6 +1735,9 @@
                 <a href="https://vk.com/club221779829" class="btn btn-vk" target="_blank" rel="noopener noreferrer">
                     <i class="fab fa-vk"></i> Оставить заявку в ВК
                 </a>
+                <button class="btn btn-booking" onclick="openBookingModal()">
+                    <i class="fas fa-calendar-check"></i> Онлайн-запись
+                </button>
                 <button class="btn btn-location" onclick="openLocationModal()">
                     <i class="fas fa-map-marker-alt"></i> Посмотреть на карте
                 </button>
@@ -1404,6 +1880,19 @@
         </div>
     </section>
 
+    <!-- Секция онлайн-записи -->
+    <section class="booking-section" id="booking">
+        <div class="container">
+            <h2 class="section-title">Онлайн-запись</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #6c757d;">Запишитесь на удобное время прямо сейчас</p>
+            <div style="text-align: center;">
+                <button class="btn booking-btn" onclick="openBookingModal()">
+                    <i class="fas fa-calendar-plus"></i> Записаться онлайн
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Секция отзывов -->
     <section class="testimonials" id="testimonials">
         <div class="container">
@@ -1461,6 +1950,19 @@
                 <div class="testimonial-grid">
                     <!-- Отзывы на депиляцию -->
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция добавления отзыва -->
+    <section class="add-review-section">
+        <div class="container">
+            <h2 class="section-title">Оставьте свой отзыв</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #6c757d;">Поделитесь своим опытом посещения нашего салона</p>
+            <div style="text-align: center;">
+                <button class="btn add-review-btn" onclick="openReviewForm()">
+                    <i class="fas fa-pen"></i> Написать отзыв
+                </button>
             </div>
         </div>
     </section>
@@ -1538,6 +2040,158 @@
         </div>
     </div>
 
+    <!-- Модальное окно формы отзыва -->
+    <div id="reviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('reviewModal')">&times;</span>
+            <h2 class="gallery-title">Оставить отзыв</h2>
+            
+            <div class="form-container">
+                <form id="reviewForm">
+                    <div class="form-group">
+                        <label for="reviewService">Услуга:</label>
+                        <select class="form-control" id="reviewService" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="brows">Перманент бровей</option>
+                            <option value="lashes">Перманент ресниц</option>
+                            <option value="lips">Перманент губ</option>
+                            <option value="tattoo">Тату</option>
+                            <option value="haircut">Стрижка</option>
+                            <option value="depilation">Депиляция</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Оценка:</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewText">Ваш отзыв:</label>
+                        <textarea class="form-control" id="reviewText" placeholder="Поделитесь вашими впечатлениями..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewName">Ваше имя:</label>
+                        <input type="text" class="form-control" id="reviewName" placeholder="Как к вам обращаться?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewAge">Ваш возраст:</label>
+                        <input type="number" class="form-control" id="reviewAge" min="16" max="100" placeholder="Возраст">
+                    </div>
+                    
+                    <button type="submit" class="btn form-submit-btn">
+                        <i class="fas fa-paper-plane"></i> Отправить отзыв
+                    </button>
+                </form>
+                
+                <p class="form-note">Ваш отзыв будет опубликован после проверки модератором.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно онлайн-записи -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('bookingModal')">&times;</span>
+            <h2 class="gallery-title">Онлайн-запись</h2>
+            
+            <div class="form-container">
+                <form id="bookingForm">
+                    <div class="booking-form-grid">
+                        <div class="form-group">
+                            <label for="bookingService">Услуга:</label>
+                            <select class="form-control" id="bookingService" required>
+                                <option value="">Выберите услугу</option>
+                                <option value="brows">Перманент бровей</option>
+                                <option value="lashes">Перманент ресниц</option>
+                                <option value="lips">Перманент губ</option>
+                                <option value="tattoo">Тату</option>
+                                <option value="haircut">Стрижка</option>
+                                <option value="depilation">Депиляция</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bookingDate">Дата:</label>
+                            <input type="date" class="form-control" id="bookingDate" required min="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Время:</label>
+                        <div class="time-slots" id="timeSlots">
+                            <!-- Временные слоты будут генерироваться через JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form-grid">
+                        <div class="form-group">
+                            <label for="clientName">Ваше имя:</label>
+                            <input type="text" class="form-control" id="clientName" placeholder="Как к вам обращаться?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="clientPhone">Телефон:</label>
+                            <input type="tel" class="form-control" id="clientPhone" placeholder="+7 (XXX) XXX-XX-XX" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientComment">Комментарий (необязательно):</label>
+                        <textarea class="form-control" id="clientComment" placeholder="Дополнительная информация или пожелания..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn form-submit-btn">
+                        <i class="fas fa-calendar-check"></i> Записаться
+                    </button>
+                </form>
+                
+                <p class="form-note">После отправки формы с вами свяжутся для подтверждения записи.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно авторизации админа -->
+    <div id="adminLoginModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close" onclick="closeModal('adminLoginModal')">&times;</span>
+            <h2 class="gallery-title">Авторизация администратора</h2>
+            
+            <div class="form-container">
+                <form id="adminLoginForm">
+                    <div class="form-group">
+                        <label for="adminUsername">Логин:</label>
+                        <input type="text" class="form-control" id="adminUsername" placeholder="Введите логин" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adminPassword">Пароль:</label>
+                        <input type="password" class="form-control" id="adminPassword" placeholder="Введите пароль" required>
+                    </div>
+                    
+                    <button type="submit" class="btn form-submit-btn">
+                        <i class="fas fa-sign-in-alt"></i> Войти
+                    </button>
+                </form>
+                
+                <p class="form-note">Доступ только для авторизованного персонала</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Модальные окна галерей -->
     <div id="galleryModal" class="modal">
         <div class="modal-content">
@@ -1569,7 +2223,19 @@
         let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         // Точные координаты для села Высокая Гора, Татарстан
-        const salonCoordinates = [55.917673, 49.312312];
+        const salonCoordinates = [55.912, 48.840];
+        
+        // ID сообщества ВК для отправки заявок
+        const VK_GROUP_ID = 'club221779829';
+        
+        // Данные для админ-панели
+        const ADMIN_CREDENTIALS = {
+            username: "admin",
+            password: "lgpermanent2023" // Можно изменить на любой пароль
+        };
+        
+        // Текущий статус авторизации
+        let isAdminAuthenticated = false;
         
         // Данные для галерей
         const galleryData = {
@@ -1606,7 +2272,7 @@
         };
 
         // Данные отзывов
-        const testimonialsData = {
+        let testimonialsData = {
             all: [
                 {
                     id: 1,
@@ -1657,7 +2323,7 @@
                     service: "tattoo",
                     serviceName: "Татуировка",
                     rating: 5,
-                    text: "Сделала первую татуичку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
+                    text: "Сделала первую татуировку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
                     author: "Ольга",
                     age: 26,
                     date: "03.12.2023",
@@ -1799,7 +2465,7 @@
                     service: "haircut",
                     serviceName: "Стрижка",
                     rating: 4,
-                    text: "Отличная стрижка! Мастер подобрала идеальную форму под тип лица. Волосы лежат прекрасно даже после домашней укладки.",
+                    text: "Отличная стрижка! Мастер подобрала идеальную форму под тип лица. Волосы лежат прекрасно даже после домашной укладки.",
                     author: "Елена",
                     age: 29,
                     date: "12.11.2023",
@@ -1925,9 +2591,137 @@
             }
         }
 
+        // Функция для обновления админ-панели
+        function updateAdminPanel() {
+            if (!isAdminAuthenticated) return;
+            
+            // Обновляем статистику
+            const totalReviews = testimonialsData.all.length;
+            const avgRating = totalReviews > 0 
+                ? (testimonialsData.all.reduce((sum, review) => sum + review.rating, 0) / totalReviews).toFixed(1)
+                : '0.0';
+            
+            document.getElementById('totalReviews').textContent = totalReviews;
+            document.getElementById('avgRating').textContent = avgRating;
+            
+            // Обновляем список отзывов
+            const adminReviewsList = document.getElementById('adminReviewsList');
+            adminReviewsList.innerHTML = '';
+            
+            testimonialsData.all.forEach(review => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'admin-review-item';
+                reviewItem.innerHTML = `
+                    <div class="admin-review-header">
+                        <span class="admin-review-service">${review.serviceName}</span>
+                        <span class="admin-review-rating">${createRatingStars(review.rating)}</span>
+                    </div>
+                    <p class="admin-review-text">${review.text}</p>
+                    <div class="admin-review-author">${review.author}, ${review.age} лет</div>
+                    <div class="admin-review-date">${review.date}</div>
+                    <div class="admin-review-actions">
+                        <button class="admin-btn admin-btn-delete" onclick="deleteReview(${review.id})">
+                            <i class="fas fa-trash"></i> Удалить
+                        </button>
+                    </div>
+                `;
+                adminReviewsList.appendChild(reviewItem);
+            });
+        }
+
+        // Функция для удаления отзыва
+        function deleteReview(reviewId) {
+            if (!isAdminAuthenticated) return;
+            
+            if (confirm('Вы уверены, что хотите удалить этот отзыв?')) {
+                // Удаляем отзыв из всех категорий
+                Object.keys(testimonialsData).forEach(category => {
+                    testimonialsData[category] = testimonialsData[category].filter(review => review.id !== reviewId);
+                });
+                
+                // Сохраняем изменения в localStorage
+                saveReviewsToStorage();
+                
+                // Обновляем отображение отзывов
+                renderTestimonials('all');
+                ['brows', 'lashes', 'lips', 'tattoo', 'haircut', 'depilation'].forEach(category => {
+                    renderTestimonials(category);
+                });
+                
+                // Обновляем админ-панель
+                updateAdminPanel();
+                
+                alert('Отзыв успешно удален!');
+            }
+        }
+
+        // Функция для сохранения отзывов в localStorage
+        function saveReviewsToStorage() {
+            localStorage.setItem('lgpermanent_reviews', JSON.stringify(testimonialsData));
+        }
+
+        // Функция для загрузки отзывов из localStorage
+        function loadReviewsFromStorage() {
+            const savedReviews = localStorage.getItem('lgpermanent_reviews');
+            if (savedReviews) {
+                testimonialsData = JSON.parse(savedReviews);
+            }
+        }
+
+        // Функция для открытия админ-панели
+        function openAdminPanel() {
+            if (!isAdminAuthenticated) {
+                openAdminLogin();
+                return;
+            }
+            
+            document.getElementById('adminPanel').classList.add('active');
+            document.getElementById('adminOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateAdminPanel();
+        }
+
+        // Функция для закрытия админ-панели
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('adminOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Функция для открытия формы авторизации
+        function openAdminLogin() {
+            document.getElementById('adminLoginModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Функция для выхода из админ-панели
+        function logoutAdmin() {
+            isAdminAuthenticated = false;
+            localStorage.removeItem('lgpermanent_admin');
+            closeAdminPanel();
+            alert('Вы вышли из админ-панели');
+        }
+
+        // Функция для проверки авторизации при загрузке
+        function checkAdminAuth() {
+            const authData = localStorage.getItem('lgpermanent_admin');
+            if (authData) {
+                const { username, timestamp } = JSON.parse(authData);
+                // Проверяем, не прошло ли более 24 часов с момента авторизации
+                if (username === ADMIN_CREDENTIALS.username && Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                    isAdminAuthenticated = true;
+                } else {
+                    localStorage.removeItem('lgpermanent_admin');
+                }
+            }
+        }
+
         // Инициализация системы отзывов
         function initTestimonials() {
-            // Рендерим все отзывы по умолчанию
+            // Загружаем отзывы из localStorage
+            loadReviewsFromStorage();
+            
+            // Рендерим все отзывов по умолчанию
             renderTestimonials('all');
             
             // Добавляем обработчики для кнопок фильтра
@@ -2028,9 +2822,68 @@
                     }
                 } catch (error) {
                     console.error('Ошибка инициализации модальной карты:', error);
-                    document.getElementById('modal-map-loading').textContent = 'Ошибка загрузка карты';
+                    document.getElementById('modal-map-loading').textContent = 'Ошибка загрузки карты';
                 }
             });
+        }
+        
+        // Функция для генерации временных слотов
+        function generateTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlotsContainer.innerHTML = '';
+            
+            const startHour = 10; // Начало рабочего дня
+            const endHour = 20;   // Конец рабочего дня
+            const slotDuration = 60; // Длительность слота в минутах
+            
+            for (let hour = startHour; hour < endHour; hour++) {
+                for (let minute = 0; minute < 60; minute += slotDuration) {
+                    const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                    const timeSlot = document.createElement('div');
+                    timeSlot.className = 'time-slot';
+                    timeSlot.textContent = timeString;
+                    timeSlot.setAttribute('data-time', timeString);
+                    
+                    // Случайным образом делаем некоторые слоты недоступными
+                    if (Math.random() > 0.7) {
+                        timeSlot.classList.add('disabled');
+                    } else {
+                        timeSlot.addEventListener('click', function() {
+                            document.querySelectorAll('.time-slot').forEach(slot => {
+                                slot.classList.remove('selected');
+                            });
+                            this.classList.add('selected');
+                        });
+                    }
+                    
+                    timeSlotsContainer.appendChild(timeSlot);
+                }
+            }
+        }
+        
+        // Функция для отправки заявки в ВК
+        async function sendBookingToVK(bookingData) {
+            try {
+                // Формируем сообщение для отправки
+                const message = `Новая заявка на запись:%0A%0A` +
+                               `👤 Имя: ${bookingData.name}%0A` +
+                               `📞 Телефон: ${bookingData.phone}%0A` +
+                               `💅 Услуга: ${bookingData.service}%0A` +
+                               `📅 Дата: ${bookingData.date}%0A` +
+                               `⏰ Время: ${bookingData.time}%0A` +
+                               `💬 Комментарий: ${bookingData.comment || 'Не указано'}`;
+                
+                // Создаем URL для отправки сообщения в группу ВК
+                const vkUrl = `https://vk.com/im?sel=${VK_GROUP_ID}&message=${message}`;
+                
+                // Открываем в новом окне (это сымитирует отправку сообщения)
+                window.open(vkUrl, '_blank');
+                
+                return true;
+            } catch (error) {
+                console.error('Ошибка при отправке заявки в ВК:', error);
+                return false;
+            }
         }
         
         // Функции для открытия модальных окон
@@ -2051,6 +2904,26 @@
                     }, 100);
                 }
             }, 50);
+        }
+        
+        function openReviewForm() {
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('reviewForm').reset();
+        }
+        
+        function openBookingModal() {
+            document.getElementById('bookingModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('bookingForm').reset();
+            
+            // Устанавливаем минимальную дату (сегодня)
+            const today = new Date();
+            const minDate = today.toISOString().split('T')[0];
+            document.getElementById('bookingDate').min = minDate;
+            
+            // Генерируем временные слоты
+            generateTimeSlots();
         }
         
         function openGallery(type) {
@@ -2096,6 +2969,138 @@
             }
         }
         
+        // Обработка формы отзыва
+        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const service = document.getElementById('reviewService').value;
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const text = document.getElementById('reviewText').value;
+            const name = document.getElementById('reviewName').value;
+            const age = document.getElementById('reviewAge').value || 'не указан';
+            
+            // Создаем новый отзыв
+            const newReview = {
+                id: Date.now(),
+                service: service,
+                serviceName: document.getElementById('reviewService').options[document.getElementById('reviewService').selectedIndex].text,
+                rating: parseInt(rating),
+                text: text,
+                author: name,
+                age: age,
+                date: new Date().toLocaleDateString('ru-RU'),
+                avatar: name.charAt(0)
+            };
+            
+            // Добавляем отзыв в данные
+            if (!testimonialsData[service]) {
+                testimonialsData[service] = [];
+            }
+            testimonialsData[service].unshift(newReview);
+            testimonialsData.all.unshift(newReview);
+            
+            // Сохраняем в localStorage
+            saveReviewsToStorage();
+            
+            // Обновляем отображение отзывов
+            renderTestimonials('all');
+            renderTestimonials(service);
+            
+            // Обновляем админ-панель если открыта
+            if (isAdminAuthenticated) {
+                updateAdminPanel();
+            }
+            
+            // Показываем сообщение об успехе
+            alert('Спасибо за ваш отзыв! Он будет показан после проверки модератором.');
+            
+            // Закрываем модальное окно
+            closeModal('reviewModal');
+        });
+        
+        // Обработка формы авторизации
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                isAdminAuthenticated = true;
+                
+                // Сохраняем данные авторизации в localStorage
+                localStorage.setItem('lgpermanent_admin', JSON.stringify({
+                    username: username,
+                    timestamp: Date.now()
+                }));
+                
+                // Закрываем модальное окно
+                closeModal('adminLoginModal');
+                
+                // Открываем админ-панель
+                openAdminPanel();
+                
+                alert('Добро пожаловать в админ-панель!');
+            } else {
+                alert('Неверные логин или пароль!');
+            }
+        });
+        
+        // Обработка формы записи
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const service = document.getElementById('bookingService').value;
+            const date = document.getElementById('bookingDate').value;
+            const timeSlot = document.querySelector('.time-slot.selected');
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const comment = document.getElementById('clientComment').value;
+            
+            // Проверяем, выбран ли временной слот
+            if (!timeSlot) {
+                alert('Пожалуйста, выберите время для записи.');
+                return;
+            }
+            
+            const time = timeSlot.getAttribute('data-time');
+            const serviceName = document.getElementById('bookingService').options[document.getElementById('bookingService').selectedIndex].text;
+            
+            // Формируем данные для отправки
+            const bookingData = {
+                name: name,
+                phone: phone,
+                service: serviceName,
+                date: date,
+                time: time,
+                comment: comment
+            };
+            
+            // Показываем индикатор загрузки
+            document.getElementById('loading').style.display = 'flex';
+            
+            try {
+                // Отправляем заявку в ВК
+                const success = await sendBookingToVK(bookingData);
+                
+                if (success) {
+                    // Показываем сообщение об успехе
+                    alert('Ваша заявка успешно отправлена! С вами свяжутся для подтверждения записи.');
+                    
+                    // Закрываем модальное окно
+                    closeModal('bookingModal');
+                } else {
+                    alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.');
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке формы записи:', error);
+                alert('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
+            } finally {
+                // Скрываем индикатор загрузки
+                document.getElementById('loading').style.display = 'none';
+            }
+        });
+        
         // Плавная прокрутка для якорных ссылок
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2118,19 +3123,23 @@
             });
         });
         
-        // Инициализация основной карты при загрузке страницы
+        // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем авторизацию админа
+            checkAdminAuth();
+            
             // Показываем индикатор загрузки
             document.getElementById('loading').style.display = 'flex';
             
             // Загружаем карту с небольшой задержкой для лучшей производительности
             setTimeout(function() {
                 initMainMap();
-                // Инициализируем систему отзывов
-                initTestimonials();
                 // Скрываем индикатор загрузки
                 document.getElementById('loading').style.display = 'none';
             }, 1000);
+            
+            // Инициализируем систему отзывов
+            initTestimonials();
             
             // Закрытие меню при ресайзе (на больших экранах)
             window.addEventListener('resize', function() {
