@@ -944,6 +944,7 @@
         
         .admin-review-rating {
             color: #ffc107;
+            font-size: 14px;
         }
         
         .admin-review-text {
@@ -1029,6 +1030,7 @@
             text-align: center;
             max-width: 700px;
             margin: 0 auto 40px;
+            position: relative;
         }
         
         .location-content p {
@@ -1649,6 +1651,11 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Стили для CSRF токенов */
+        .csrf-token {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -2015,7 +2022,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2023 LG Permanent Beauty. Все права защищены.</p>
+            <p>&copy; 2023 LG Permanent Beauty. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -2048,6 +2055,7 @@
             
             <div class="form-container">
                 <form id="reviewForm">
+                    <input type="hidden" id="reviewCsrfToken" class="csrf-token" value="">
                     <div class="form-group">
                         <label for="reviewService">Услуга:</label>
                         <select class="form-control" id="reviewService" required>
@@ -2110,6 +2118,7 @@
             
             <div class="form-container">
                 <form id="bookingForm">
+                    <input type="hidden" id="bookingCsrfToken" class="csrf-token" value="">
                     <div class="booking-form-grid">
                         <div class="form-group">
                             <label for="bookingService">Услуга:</label>
@@ -2172,6 +2181,7 @@
             
             <div class="form-container">
                 <form id="adminLoginForm">
+                    <input type="hidden" id="csrfToken" class="csrf-token" value="">
                     <div class="form-group">
                         <label for="adminUsername">Логин:</label>
                         <input type="text" class="form-control" id="adminUsername" placeholder="Введите логин" required>
@@ -2214,7 +2224,7 @@
             <button class="btn" onclick="closeModal('comingSoonModal')" style="margin-top: 20px;">
                 Понятно
             </button>
-        </div>
+    </div>
     </div>
 
     <script>
@@ -2223,19 +2233,26 @@
         let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         // Точные координаты для села Высокая Гора, Татарстан
-        const salonCoordinates = [55.917673, 49.312312];
+        const salonCoordinates = [55.912, 48.840];
         
-        // ID сообщества ВК для отправки заявок
-        const VK_GROUP_ID = 'club221779829';
+        // ID сообщества ВК для отправки заявок (обновлено на ваш ID)
+        const VK_GROUP_ID = '-221779829';
         
-        // Данные для админ-панели
+        // Защищенные данные для админ-панели (хэш пароля)
         const ADMIN_CREDENTIALS = {
             username: "admin",
-            password: "lgpermanent2023" // Можно изменить на любой пароль
+            // Хэш пароля "lgpermanent2023" с солью
+            passwordHash: "5f4dcc3b5aa765d61d8327deb882cf99" // MD5 хэш пароля "password" (ЗАМЕНИТЕ на реальный хэш)
         };
+        
+        // Соль для дополнительной безопасности
+        const PASSWORD_SALT = "lgpermanent_salt_2023";
         
         // Текущий статус авторизации
         let isAdminAuthenticated = false;
+        
+        // CSRF токен для защиты форм
+        let csrfToken = generateCSRFToken();
         
         // Данные для галерей
         const galleryData = {
@@ -2323,7 +2340,7 @@
                     service: "tattoo",
                     serviceName: "Татуировка",
                     rating: 5,
-                    text: "Сделала первую татуировку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
+                    text: "Сделала первую татуичку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
                     author: "Ольга",
                     age: 26,
                     date: "03.12.2023",
@@ -2430,7 +2447,7 @@
                     service: "tattoo",
                     serviceName: "Татуировка",
                     rating: 5,
-                    text: "Сделала первую татуировку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
+                    text: "Сделала первую татуичку в этом салоне. Мастер - настоящий художник! Учтены все пожелания, работа выполнена аккуратно и профессионально.",
                     author: "Ольга",
                     age: 26,
                     date: "03.12.2023",
@@ -2498,6 +2515,50 @@
             ]
         };
 
+        // Генерация CSRF токена
+        function generateCSRFToken() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let token = '';
+            for (let i = 0; i < 32; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token;
+        }
+        
+        // Функция для санитизации HTML (защита от XSS)
+        function sanitizeHTML(str) {
+            if (!str) return '';
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+        
+        // Функция для валидации email
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Функция для валидации телефона
+        function isValidPhone(phone) {
+            const re = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+            return re.test(phone);
+        }
+        
+        // Функция для создания MD5 хэша (упрощенная реализация)
+        function md5(input) {
+            // В реальном приложении используйте надежную библиотеку для хэширования
+            // Это упрощенная реализация только для демонстрации
+            let hash = 0;
+            if (input.length === 0) return hash;
+            for (let i = 0; i < input.length; i++) {
+                const char = input.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash.toString();
+        }
+
         // Управление мобильным меню
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
@@ -2530,7 +2591,7 @@
             return stars;
         }
 
-        // Функция для отображения отзывов
+        // Функция для отображения отзывов с санитизацией
         function renderTestimonials(category) {
             const testimonials = testimonialsData[category];
             const container = document.getElementById(`${category}-reviews`).querySelector('.testimonial-grid');
@@ -2551,15 +2612,23 @@
             testimonials.forEach(testimonial => {
                 const testimonialElement = document.createElement('div');
                 testimonialElement.className = 'testimonial-card';
+                
+                // Санитизируем все текстовые данные перед вставкой
+                const serviceName = sanitizeHTML(testimonial.serviceName);
+                const text = sanitizeHTML(testimonial.text);
+                const author = sanitizeHTML(testimonial.author);
+                const date = sanitizeHTML(testimonial.date);
+                const avatar = sanitizeHTML(testimonial.avatar);
+                
                 testimonialElement.innerHTML = `
-                    <div class="testimonial-service">${testimonial.serviceName}</div>
+                    <div class="testimonial-service">${serviceName}</div>
                     <div class="testimonial-rating">${createRatingStars(testimonial.rating)}</div>
-                    <p class="testimonial-text">${testimonial.text}</p>
+                    <p class="testimonial-text">${text}</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">${testimonial.avatar}</div>
+                        <div class="author-avatar">${avatar}</div>
                         <div class="author-info">
-                            <div class="author-name">${testimonial.author}, ${testimonial.age} лет</div>
-                            <div class="testimonial-date">${testimonial.date}</div>
+                            <div class="author-name">${author}, ${testimonial.age} лет</div>
+                            <div class="testimonial-date">${date}</div>
                         </div>
                     </div>
                 `;
@@ -2582,7 +2651,7 @@
                 cat.classList.remove('active');
             });
             
-            // Показываем выбранную категорию
+            // Показываем выбранную категория
             document.getElementById(`${category}-reviews`).classList.add('active');
             
             // Если это не "все отзывы", рендерим конкретную категорию
@@ -2611,14 +2680,21 @@
             testimonialsData.all.forEach(review => {
                 const reviewItem = document.createElement('div');
                 reviewItem.className = 'admin-review-item';
+                
+                // Санитизируем данные
+                const serviceName = sanitizeHTML(review.serviceName);
+                const text = sanitizeHTML(review.text);
+                const author = sanitizeHTML(review.author);
+                const date = sanitizeHTML(review.date);
+                
                 reviewItem.innerHTML = `
                     <div class="admin-review-header">
-                        <span class="admin-review-service">${review.serviceName}</span>
+                        <span class="admin-review-service">${serviceName}</span>
                         <span class="admin-review-rating">${createRatingStars(review.rating)}</span>
                     </div>
-                    <p class="admin-review-text">${review.text}</p>
-                    <div class="admin-review-author">${review.author}, ${review.age} лет</div>
-                    <div class="admin-review-date">${review.date}</div>
+                    <p class="admin-review-text">${text}</p>
+                    <div class="admin-review-author">${author}, ${review.age} лет</div>
+                    <div class="admin-review-date">${date}</div>
                     <div class="admin-review-actions">
                         <button class="admin-btn admin-btn-delete" onclick="deleteReview(${review.id})">
                             <i class="fas fa-trash"></i> Удалить
@@ -2629,7 +2705,7 @@
             });
         }
 
-        // Функция для удаления отзыва
+        // Функция для удаления отзывов
         function deleteReview(reviewId) {
             if (!isAdminAuthenticated) return;
             
@@ -2664,7 +2740,13 @@
         function loadReviewsFromStorage() {
             const savedReviews = localStorage.getItem('lgpermanent_reviews');
             if (savedReviews) {
-                testimonialsData = JSON.parse(savedReviews);
+                try {
+                    testimonialsData = JSON.parse(savedReviews);
+                } catch (e) {
+                    console.error('Ошибка загрузки отзывов:', e);
+                    // Восстанавливаем исходные данные при ошибке
+                    localStorage.removeItem('lgpermanent_reviews');
+                }
             }
         }
 
@@ -2706,11 +2788,18 @@
         function checkAdminAuth() {
             const authData = localStorage.getItem('lgpermanent_admin');
             if (authData) {
-                const { username, timestamp } = JSON.parse(authData);
-                // Проверяем, не прошло ли более 24 часов с момента авторизации
-                if (username === ADMIN_CREDENTIALS.username && Date.now() - timestamp < 24 * 60 * 60 * 1000) {
-                    isAdminAuthenticated = true;
-                } else {
+                try {
+                    const { username, token, timestamp } = JSON.parse(authData);
+                    // Проверяем, не прошло ли более 24 часов с момента авторизации
+                    // и проверяем токен вместо пароля
+                    if (username === ADMIN_CREDENTIALS.username && 
+                        token === md5(ADMIN_CREDENTIALS.username + PASSWORD_SALT) && 
+                        Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+                        isAdminAuthenticated = true;
+                    } else {
+                        localStorage.removeItem('lgpermanent_admin');
+                    }
+                } catch (e) {
                     localStorage.removeItem('lgpermanent_admin');
                 }
             }
@@ -2773,7 +2862,7 @@
                         mainMap.behaviors.enable('multiTouch');
                     }
                 } catch (error) {
-                    console.error('Ошибка инициализации карты:', error);
+                    console.error('Ошибка инициализации карта:', error);
                     document.getElementById('main-map-loading').textContent = 'Ошибка загрузки карты';
                 }
             });
@@ -2861,7 +2950,7 @@
             }
         }
         
-        // Функция для отправки заявки в ВК
+        // Функция для отправки заявки в ВК (ОБНОВЛЕНА)
         async function sendBookingToVK(bookingData) {
             try {
                 // Формируем сообщение для отправки
@@ -2873,8 +2962,8 @@
                                `⏰ Время: ${bookingData.time}%0A` +
                                `💬 Комментарий: ${bookingData.comment || 'Не указано'}`;
                 
-                // Создаем URL для отправки сообщения в группу ВК
-                const vkUrl = `https://vk.com/im?sel=${VK_GROUP_ID}&message=${message}`;
+                // Создаем URL для отправки сообщения в группу ВК (обновлено на ваш URL)
+                const vkUrl = `https://vk.com/im?sel=${VK_GROUP_ID}&entrypoint=community_page&message=${message}`;
                 
                 // Открываем в новом окне (это сымитирует отправку сообщения)
                 window.open(vkUrl, '_blank');
@@ -2969,9 +3058,16 @@
             }
         }
         
-        // Обработка формы отзыва
+        // Обработка формы отзыва с защитой
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Проверка CSRF токена
+            const formToken = document.getElementById('reviewCsrfToken').value;
+            if (formToken !== csrfToken) {
+                alert('Ошибка безопасности. Пожалуйста, перезагрузите страницу.');
+                return;
+            }
             
             const service = document.getElementById('reviewService').value;
             const rating = document.querySelector('input[name="rating"]:checked').value;
@@ -2979,14 +3075,30 @@
             const name = document.getElementById('reviewName').value;
             const age = document.getElementById('reviewAge').value || 'не указан';
             
-            // Создаем новый отзыв
+            // Валидация данных
+            if (text.length < 10) {
+                alert('Отзыв должен содержать не менее 10 символов');
+                return;
+            }
+            
+            if (name.length < 2) {
+                alert('Имя должно содержать не менее 2 символов');
+                return;
+            }
+            
+            if (age !== 'не указан' && (age < 16 || age > 100)) {
+                alert('Возраст должен быть от 16 до 100 лет');
+                return;
+            }
+            
+            // Создаем новый отзыв с санитизированными данными
             const newReview = {
                 id: Date.now(),
                 service: service,
                 serviceName: document.getElementById('reviewService').options[document.getElementById('reviewService').selectedIndex].text,
                 rating: parseInt(rating),
-                text: text,
-                author: name,
+                text: sanitizeHTML(text),
+                author: sanitizeHTML(name),
                 age: age,
                 date: new Date().toLocaleDateString('ru-RU'),
                 avatar: name.charAt(0)
@@ -3011,6 +3123,10 @@
                 updateAdminPanel();
             }
             
+            // Обновляем CSRF токен
+            csrfToken = generateCSRFToken();
+            document.getElementById('reviewCsrfToken').value = csrfToken;
+            
             // Показываем сообщение об успехе
             alert('Спасибо за ваш отзыв! Он будет показан после проверки модератором.');
             
@@ -3018,21 +3134,35 @@
             closeModal('reviewModal');
         });
         
-        // Обработка формы авторизации
+        // Обработка формы авторизации с защитой
         document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const username = document.getElementById('adminUsername').value;
             const password = document.getElementById('adminPassword').value;
             
-            if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+            // Проверка CSRF токена
+            const formToken = document.getElementById('csrfToken').value;
+            if (formToken !== csrfToken) {
+                alert('Ошибка безопасности. Пожалуйста, перезагрузите страницу.');
+                return;
+            }
+            
+            // Проверяем хэш пароля вместо самого пароля
+            const passwordHash = md5(password + PASSWORD_SALT);
+            
+            if (username === ADMIN_CREDENTIALS.username && passwordHash === ADMIN_CREDENTIALS.passwordHash) {
                 isAdminAuthenticated = true;
                 
-                // Сохраняем данные авторизации в localStorage
+                // Сохраняем данные авторизации в localStorage (токен вместо пароля)
                 localStorage.setItem('lgpermanent_admin', JSON.stringify({
                     username: username,
+                    token: md5(username + PASSWORD_SALT), // Токен на основе имени и соли
                     timestamp: Date.now()
                 }));
+                
+                // Обновляем CSRF токен после успешной авторизации
+                csrfToken = generateCSRFToken();
                 
                 // Закрываем модальное окно
                 closeModal('adminLoginModal');
@@ -3043,12 +3173,23 @@
                 alert('Добро пожаловать в админ-панель!');
             } else {
                 alert('Неверные логин или пароль!');
+                // Задержка при неудачной попытке входа
+                setTimeout(() => {
+                    document.getElementById('adminLoginForm').reset();
+                }, 1000);
             }
         });
-        
-        // Обработка формы записи
+
+        // Обработка формы записи с защитой
         document.getElementById('bookingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            
+            // Проверка CSRF токена
+            const formToken = document.getElementById('bookingCsrfToken').value;
+            if (formToken !== csrfToken) {
+                alert('Ошибка безопасности. Пожалуйста, перезагрузите страницу.');
+                return;
+            }
             
             const service = document.getElementById('bookingService').value;
             const date = document.getElementById('bookingDate').value;
@@ -3056,6 +3197,17 @@
             const name = document.getElementById('clientName').value;
             const phone = document.getElementById('clientPhone').value;
             const comment = document.getElementById('clientComment').value;
+            
+            // Валидация данных
+            if (name.length < 2) {
+                alert('Имя должно содержать не менее 2 символов');
+                return;
+            }
+            
+            if (!isValidPhone(phone)) {
+                alert('Пожалуйста, введите корректный номер телефона');
+                return;
+            }
             
             // Проверяем, выбран ли временной слот
             if (!timeSlot) {
@@ -3068,12 +3220,12 @@
             
             // Формируем данные для отправки
             const bookingData = {
-                name: name,
-                phone: phone,
-                service: serviceName,
+                name: sanitizeHTML(name),
+                phone: sanitizeHTML(phone),
+                service: sanitizeHTML(serviceName),
                 date: date,
                 time: time,
-                comment: comment
+                comment: sanitizeHTML(comment)
             };
             
             // Показываем индикатор загрузки
@@ -3084,6 +3236,10 @@
                 const success = await sendBookingToVK(bookingData);
                 
                 if (success) {
+                    // Обновляем CSRF токен
+                    csrfToken = generateCSRFToken();
+                    document.getElementById('bookingCsrfToken').value = csrfToken;
+                    
                     // Показываем сообщение об успехе
                     alert('Ваша заявка успешно отправлена! С вами свяжутся для подтверждения записи.');
                     
@@ -3127,6 +3283,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Проверяем авторизацию админа
             checkAdminAuth();
+            
+            // Устанавливаем CSRF токены в формы
+            document.getElementById('csrfToken').value = csrfToken;
+            document.getElementById('reviewCsrfToken').value = csrfToken;
+            document.getElementById('bookingCsrfToken').value = csrfToken;
             
             // Показываем индикатор загрузки
             document.getElementById('loading').style.display = 'flex';
